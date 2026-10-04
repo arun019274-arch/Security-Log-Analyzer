@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Security Log Analyzer</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Security Log Analyzer</h1>
+
+        <p class="subtitle">
+            Intrusion Detection Dashboard
+        </p>
+        <a href="/generate-report" class="report-button">
+    Generate Security Report
+</a>
+
+        <div class="stats">
+
+            <div class="card">
+                <h3>Total Alerts</h3>
+                <p>{{ alerts|length }}</p>
+            </div>
+
+            <div class="card">
+                <h3>High Risk</h3>
+                <p>
+                    {{ alerts
+                       |selectattr("risk_level", "equalto", "High")
+                       |list
+                       |length }}
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>Medium Risk</h3>
+                <p>
+                    {{ alerts
+                       |selectattr("risk_level", "equalto", "Medium")
+                       |list
+                       |length }}
+                </p>
+            </div>
+
+        </div>
+
+        <div class="table-container">
+
+            <h2>Security Alerts</h2>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>ID</th>
+                        <th>Alert Type</th>
+                        <th>IP Address</th>
+                        <th>Username</th>
+                        <th>Attempts</th>
+                        <th>Risk</th>
+                        <th>Description</th>
+                        <th>Timestamp</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% for alert in alerts %}
+
+                    <tr>
+
+                        <td>{{ alert["id"] }}</td>
+
+                        <td>
+                            {{ alert["alert_type"] }}
+                        </td>
+
+                        <td>
+                            {{ alert["ip_address"] }}
+                        </td>
+
+                        <td>
+                            {{ alert["username"] }}
+                        </td>
+
+                        <td>
+                            {{ alert["attempts"] }}
+                        </td>
+
+                        <td>
+                            <span class="risk {{ alert['risk_level']|lower }}">
+                                {{ alert["risk_level"] }}
+                            </span>
+                        </td>
+
+                        <td>
+                            {{ alert["description"] }}
+                        </td>
+
+                        <td>
+                            {{ alert["timestamp"] }}
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,27 @@
+======================================================================
+SECURITY LOG ANALYZER - SECURITY REPORT
+======================================================================
+
+Report Generated: 2026-09-24 21:41:14
+
+Total Alerts: 2
+
+----------------------------------------------------------------------
+Alert ID    : 6
+Alert Type  : SUCCESS_AFTER_FAILURES
+IP Address  : 192.168.1.50
+Username    : admin
+Attempts    : 4
+Risk Level  : High
+Description : Successful login detected after 4 failed attempts from 192.168.1.50
+Timestamp   : 2026-09-24 21:30:02
+----------------------------------------------------------------------
+Alert ID    : 5
+Alert Type  : MULTIPLE_FAILED_LOGINS
+IP Address  : 192.168.1.50
+Username    : admin
+Attempts    : 4
+Risk Level  : Medium
+Description : 4 failed login attempts detected from 192.168.1.50
+Timestamp   : 2026-09-24 21:30:01
+----------------------------------------------------------------------
